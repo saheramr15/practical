@@ -1,18 +1,44 @@
 
-
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const port = 8080
+const session = require('express-session');
+const ejs = require('ejs');
+const path = require('path');
+const port = 8080;
+app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.use(express.urlencoded({ extended: true }));
+app.use(
+    session({
+        secret: 'Your_secret_key',
+        saveUninitialized: false,
+        resave: false,
+    })
+);
 
 
+mongoose
+    .connect(
+        'mongodb+srv://saheramr:saheramr15@cluster0.hkxmtiw.mongodb.net/practical?retryWrites=true&w=majority'
+    )
+    .then((result) => {
+        console.log('database connection success');
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+    app.use(express.static(path.join(__dirname, 'public')));
 
-mongodb+srv://saheramr:<password>@cluster0.hkxmtiw.mongodb.net/?retryWrites=true&w=majority
+    app.get('/', (req, res) => {
+      res.render('pages/home')
+    })
+
+    
+
+
+    app.listen(port, () => {
+        console.log('http://localhost:8080');
+    });
+
