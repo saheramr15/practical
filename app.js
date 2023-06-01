@@ -6,6 +6,7 @@ const session = require('express-session');
 const ejs = require('ejs');
 const path = require('path');
 const port = 8080;
+const  User  = require('./models/user');
 app.use(express.urlencoded({ extended: true }));
 app.use(
     session({
@@ -41,6 +42,18 @@ mongoose
     app.get('/', (req, res) => {
         res.render('pages/home', { user: (req.session.user === undefined ? "" : req.session.user) });
     })
+
+    app.get('/delete', (req, res) => {
+        res.render('pages/delete', { user: (req.session.user === undefined ? "" : req.session.user) });
+    })
+    app.post('/delete',async (req, res) => {
+
+        await User.findOneAndRemove(req.params.name);
+        res.render('pages/home', { user: (req.session.user === undefined ? "" : req.session.user) });
+    
+    })
+
+
 
     
 
