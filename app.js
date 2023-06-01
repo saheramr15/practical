@@ -6,6 +6,13 @@ const session = require('express-session');
 const ejs = require('ejs');
 const path = require('path');
 const port = 8080;
+
+
+///////////routers
+const addRouter = require('./routers/add');
+
+app.use('/signup', addRouter);
+
 app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({ extended: true }));
@@ -36,7 +43,6 @@ mongoose
     })
 
     
-
 
     app.listen(port, () => {
         console.log('http://localhost:8080');
