@@ -11,33 +11,13 @@ const userSchema = mongoose.Schema(
         },
         email: {
             type: String,
-            unique: true,
-            lowercase: true,
-            required: [true, "Cannot be blank."],
-            match: [/\S+@\S+\.\S+/, "Invalid input."],
-            index: true,
+            required: true,
         },
         password: {
             type: String,
             required: true,
-        },
-        phone:{
-            type: Number,
-            required: true,
-        },
-        isAdmin:{
-            type: Boolean,
-            default : false,
-        },
-        address: String,
-        wishlist: [{type: mongoose.Schema.Types.ObjectId,
-        ref: 'products'}],
-        orders: [
-            {
-              type: mongoose.Schema.Types.ObjectId,
-              ref: 'orders',
-            },
-          ],
+        }
+
     },
     { timestamps: true }
 );
