@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get(`/`, async  (req, res) => {
     
-res.render('pages/signup')
+res.render('pages/signup');
 
 });
 
