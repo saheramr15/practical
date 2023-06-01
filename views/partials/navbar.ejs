@@ -1,0 +1,25 @@
+<head>
+    <link rel="stylesheet" href="/css/mystyle.css">
+  </head>
+  
+  <div class='topnav'>
+    <a href='/'>Home</a>
+    <a href='/slide'>Gallery</a>
+    <a href='/about'>About</a>
+  
+    <% if(user==="" ) {%>
+      <a href='/user/signup'>Sign Up</a>
+      <a href='/user/login'>Login</a>
+    <% }
+    else { 
+      if(user.Type==="admin" ) { %>
+        <a href='/admin/viewAll'>Admin</a>
+      <% } %>
+      <a href='/user/profile'>Profile</a>
+      <a href='/user/logout'>Logout</a>
+  
+      <div class="user">
+        Welcome <%= user.UserName %>
+      </div>
+    <% } %>
+  </div>

@@ -39,7 +39,7 @@ mongoose
     app.use(express.static(path.join(__dirname, 'public')));
 
     app.get('/', (req, res) => {
-      res.render('pages/home')
+        res.render('pages/home', { user: (req.session.user === undefined ? "" : req.session.user) });
     })
 
     
